@@ -2,12 +2,12 @@
 Find the depth of a fall using the time measured between the release of an object and the sound of impact.
 
 Parameters:
-mt: measured time in seconds
+measured_time: measured time in seconds
 iterations: maximum number of iterations that the code should execute
 precision: number of decimal places in the result
 
 Constants:
-v: speed of sound (330.0 m/s)
+speed_of_sound: speed of sound (330.0 m/s)
 g: gravitational acceleration (9.8 m/s²)
 
 Returns:
@@ -16,19 +16,19 @@ Tuple with the rounded depth and difference between the calculated and measured 
 
 from math import sqrt
 
-def depth(mt: float, iterations: int = 1000, precision: int = 3):
+def depth(measured_time: float, iterations: int = 1000, precision: int = 3):
 
-    # Constants of nature
-    v = 330.0 # Speed of sound
-    g = 9.8 # Gravitational acceleration
+    # Constants
+    speed_of_sound = 330.0
+    g = 9.8
 
-    h = (g * mt**2) / 2 # Initially estimated height assuming the sound as instantaneous
+    height= (g * measured_time**2)/2 # Initially estimated height assuming the sound as instantaneous
 
-    # Loop to find the root of the function f(h) = ct(h) - mt
+    # Loop to find the root of the function f(height) = calculated_time(height) - measured_time
     for i in range(iterations):
 
-        ct = (h/v) + sqrt(2*h/g) # Calculated time given h
-        dct = (1/v) + 1/sqrt(2*g*h) # Derivative dct/dh
-        h = h - (ct - mt)/dct # New estimative of h using Newton-Raphson method
+        calculated_time = (height/speed_of_sound) + sqrt(2*height/g) # Calculated time given height
+        dcalculated_time = (1/speed_of_sound) + 1/sqrt(2*g*height) # Derivative dcalculated_time/dheight
+        height= height- (calculated_time - measured_time)/dcalculated_time # New estimative of height using Newton-Raphson method
 
-    return round(h, precision), round(abs(ct - mt), precision)
+    return round(height, precision), round(abs(calculated_time - measured_time), precision)
