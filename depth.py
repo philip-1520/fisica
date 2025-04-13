@@ -32,3 +32,7 @@ def depth(measured_time: float, iterations: int = 1000, precision: int = 3):
         height = height- (calculated_time - measured_time)/dcalculated_time # New estimative of height using Newton-Raphson method
 
     return round(height, precision), round(abs(calculated_time - measured_time), precision)
+    
+if __name__ == '__main__':
+    measured_time = float(input('Insert the measured time in seconds: '))
+    print(depth(measured_time))
