@@ -29,6 +29,6 @@ def depth(measured_time: float, iterations: int = 1000, precision: int = 3):
 
         calculated_time = (height/speed_of_sound) + sqrt(2*height/g) # Calculated time given height
         dcalculated_time = (1/speed_of_sound) + 1/sqrt(2*g*height) # Derivative dcalculated_time/dheight
-        height= height- (calculated_time - measured_time)/dcalculated_time # New estimative of height using Newton-Raphson method
+        height = height- (calculated_time - measured_time)/dcalculated_time # New estimative of height using Newton-Raphson method
 
     return round(height, precision), round(abs(calculated_time - measured_time), precision)
